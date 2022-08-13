@@ -14,6 +14,6 @@ int main() {
   });
   s.on<Message>([&](const std::string& data) { raw += data; });
   s.on<Close>(
-      [&]() { std::cout << HTTP::ResponceHeader(raw).content << std::endl; });
+      [&]() { std::cout << HTTP::ResponseHeader(raw).content << std::endl; });
   s.start().join();
 }

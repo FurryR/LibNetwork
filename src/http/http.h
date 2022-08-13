@@ -79,7 +79,7 @@ typedef struct RequestHeader {
   }
 } RequestHeader;
 // Responce Header class.
-typedef struct ResponceHeader {
+typedef struct ResponseHeader {
   // settings.
   std::map<std::string, std::string> conf;
   // HTTP status(200 OK).
@@ -97,16 +97,16 @@ typedef struct ResponceHeader {
     ret += content;
     return ret;
   }
-  ResponceHeader() {}
+  ResponseHeader() {}
   // construct by value.
-  ResponceHeader(const std::map<std::string, std::string> &_conf,
+  ResponseHeader(const std::map<std::string, std::string> &_conf,
                  const std::string &_status, const std::string &_content) {
     conf = _conf;
     status = _status;
     content = _content;
   }
   // construct by raw header.
-  ResponceHeader(const std::string &str) {
+  ResponseHeader(const std::string &str) {
     std::vector<std::string> s = _split(str, '\n');
     if (s.size() < 1) throw std::runtime_error("Invalid Header");
     std::vector<std::string> w = _split(s[0].substr(0, s[0].length() - 1), ' ');
@@ -127,6 +127,6 @@ typedef struct ResponceHeader {
     }
     if (content != "") content = content.substr(0, content.length() - 1);
   }
-} ResponceHeader;
+} ResponseHeader;
 };  // namespace HTTP
 #endif
